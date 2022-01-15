@@ -49,7 +49,7 @@ export default class TelegramWidgetStrategy extends Strategy {
       throw new TypeError('TelegramWidgetStrategy requires a verify callback');
     }
     super();
-    this.name = 'TelegramWidgetStrategy';
+    this.name = 'telegram-widget';
     this.verify = verify;
 
     this.botToken = options.botToken;

@@ -20,8 +20,8 @@ describe('Strategy', () => {
       (req, user, authData) => {}
     );
 
-    it('has the name TelegramWidgetStrategy', () => {
-      expect(strategy.name).toBe('TelegramWidgetStrategy');
+    it('has the name telegram-widget', () => {
+      expect(strategy.name).toBe('telegram-widget');
     });
 
     it('throws without botToken option', () => {
