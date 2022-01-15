@@ -103,7 +103,7 @@ export default class TelegramWidgetStrategy extends Strategy {
       return this.fail(new BadHashError(), 400);
     }
 
-    this.verify(req, user, this.verified);
+    this.verify(req, user, this.verified.bind(this));
   }
 
   verifyHash({ hash, ...data }: TelegramUser) {
@@ -122,7 +122,11 @@ export default class TelegramWidgetStrategy extends Strategy {
     return false;
   }
 
-  verified: VerifiedCallback = (err, user, info) => {
+  verified(
+    err: Error | null,
+    user: any,
+    info?: string | { message?: string; type?: string }
+  ) {
     if (err) {
       return this.error(err);
     }
@@ -132,5 +136,5 @@ export default class TelegramWidgetStrategy extends Strategy {
     }
 
     this.success(user, info);
-  };
+  }
 }

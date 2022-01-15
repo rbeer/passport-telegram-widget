@@ -48,19 +48,17 @@ describe('Strategy', () => {
 
       it('calls verify with a TelegramUser', () => {
         strategy.authenticate(req);
-        expect(verify).toHaveBeenCalledWith(
-          req,
-          {
-            id: validParams.id,
-            auth_date: validParams.auth_date,
-            hash: validParams.hash,
-            first_name: validParams.first_name,
-            username: validParams.username,
-            last_name: validParams.last_name,
-            photo_url: validParams.photo_url
-          },
-          strategy.verified
-        );
+        console.log(verify.mock.calls[0][1]);
+        expect(verify.mock.calls[0]).toContainEqual(req);
+        expect(verify.mock.calls[0]).toContainEqual({
+          id: validParams.id,
+          auth_date: validParams.auth_date,
+          hash: validParams.hash,
+          first_name: validParams.first_name,
+          username: validParams.username,
+          last_name: validParams.last_name,
+          photo_url: validParams.photo_url
+        });
       });
     });
 
