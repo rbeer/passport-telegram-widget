@@ -1,7 +1,7 @@
 import { getMockReq } from '@jest-mock/express';
 
-import TelegramWidgetStrategy from '../index';
-import BadHashError from '../lib/bad-hash-error';
+import TelegramWidgetStrategy from '../lib/strategy';
+import BadHashError from '../lib/errors/bad-hash-error';
 import { getParams as validParams } from './fixtures/valid';
 
 // There's going to be some @ts-ignores in here;
@@ -17,7 +17,8 @@ describe('Strategy', () => {
       {
         botToken
       },
-      (req, user, authData) => {}
+      /* (req, user, done) => void */
+      (_, __, ___) => {}
     );
 
     it('has the name telegram-widget', () => {

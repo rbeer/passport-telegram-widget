@@ -10,5 +10,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "exclude": ["tests", "dist"]
+  "exclude": ["tests", "dist"],
+  "include": ["index.d.ts", "index.ts", "lib"]
 }
