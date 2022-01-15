@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/node12",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "declaration": true,
+    "removeComments": true,
+    "declarationDir": "./dist/types",
+    "noImplicitAny": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "exclude": ["tests", "dist"]
+}
