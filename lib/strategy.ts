@@ -6,6 +6,17 @@ import { Strategy } from 'passport-strategy';
 import BadHashError from './errors/bad-hash-error';
 import BadQueryError from './errors/bad-query-error';
 
+interface QueryTypes {
+  id: string;
+  auth_date: string;
+  hash: string;
+  first_name: string;
+  last_name?: string;
+  username?: string;
+  photo_url?: string;
+  [key: string]: string | undefined;
+}
+
 type TelegramUser = {
   id: string;
   auth_date: string;
@@ -32,17 +43,6 @@ export type VerifyFn = (
   user: TelegramUser,
   done: VerifiedCallback
 ) => void;
-
-interface QueryTypes {
-  id: string;
-  auth_date: string;
-  hash: string;
-  first_name: string;
-  last_name?: string;
-  username?: string;
-  photo_url?: string;
-  [key: string]: string | undefined;
-}
 
 export type QueryRequest = Request<
   {},
