@@ -1,6 +1,6 @@
 import { getMockReq } from '@jest-mock/express';
 
-import TelegramWidgetStrategy, { VerifyFn } from '../index';
+import TelegramWidgetStrategy from '../index';
 import BadHashError from '../lib/bad-hash-error';
 import { getParams as validParams } from './fixtures/valid';
 
@@ -9,7 +9,7 @@ import { getParams as validParams } from './fixtures/valid';
 // in pure JavaScript projects, so we need some missing
 // value testing, here and there...
 
-const botToken = '1234567890:AAFCSzHhGgR3ydLltMLLJflcld8Mhy9ziYu';
+const botToken = 'ABC:12345...';
 
 describe('Strategy', () => {
   describe('constructing', () => {
@@ -41,7 +41,7 @@ describe('Strategy', () => {
 
   describe('request handling', () => {
     describe('with valid user data', () => {
-      let req = getMockReq({ params: validParams });
+      let req = getMockReq({ query: validParams });
       let verify = jest.fn();
       const strategy = new TelegramWidgetStrategy({ botToken }, verify);
 
@@ -51,12 +51,12 @@ describe('Strategy', () => {
           req,
           {
             id: validParams.id,
+            auth_date: validParams.auth_date,
+            hash: validParams.hash,
+            first_name: validParams.first_name,
             username: validParams.username,
-            firstName: validParams.first_name,
-            lastName: validParams.last_name,
-            photoUrl: validParams.photo_url,
-            authDate: validParams.auth_date,
-            hash: validParams.hash
+            last_name: validParams.last_name,
+            photo_url: validParams.photo_url
           },
           strategy.verified
         );
@@ -65,7 +65,7 @@ describe('Strategy', () => {
 
     describe('with invalid hash', () => {
       let req = getMockReq({
-        params: { ...validParams, hash: 'this is just wrong' }
+        query: { ...validParams, hash: 'this is just wrong' }
       });
       let verify = () => {};
       const strategy = new TelegramWidgetStrategy({ botToken }, verify);
@@ -79,7 +79,7 @@ describe('Strategy', () => {
   });
 
   describe('VerifiedCallback handling', () => {
-    let req = getMockReq({ params: validParams });
+    let req = getMockReq({ query: validParams });
     const err = new Error('called it!');
 
     describe('with an error', () => {
