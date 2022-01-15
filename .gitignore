@@ -2,3 +2,5 @@ dist
 node_modules
 res
 *.log
+yarn.lock
+package-lock.json
