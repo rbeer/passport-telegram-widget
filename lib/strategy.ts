@@ -57,8 +57,6 @@ export default class TelegramWidgetStrategy extends Strategy {
 
   verify: VerifyFn;
 
-  botToken: string;
-
   botTokenHash: Buffer;
 
   constructor(options: TelegramWidgetStrategyOptions, verify: VerifyFn) {
@@ -76,8 +74,7 @@ export default class TelegramWidgetStrategy extends Strategy {
     this.name = 'telegram-widget';
     this.verify = verify;
 
-    this.botToken = options.botToken;
-    this.botTokenHash = createHash('sha256').update(this.botToken).digest();
+    this.botTokenHash = createHash('sha256').update(options.botToken).digest();
   }
 
   authenticate(req: QueryRequest) {
