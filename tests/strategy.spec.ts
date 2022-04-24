@@ -48,7 +48,6 @@ describe('Strategy', () => {
 
       it('calls verify with a TelegramUser', () => {
         strategy.authenticate(req);
-        console.log(verify.mock.calls[0][1]);
         expect(verify.mock.calls[0]).toContainEqual(req);
         expect(verify.mock.calls[0]).toContainEqual({
           id: validParams.id,
